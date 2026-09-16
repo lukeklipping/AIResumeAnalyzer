@@ -1,6 +1,6 @@
 # AI Resume Analyzer
 
-An interactive web application built with **Streamlit** and the **Google GenAI SDK** that analyzes resumes (PDF, DOCX, or TXT), provides detailed qualitative feedback, and generates a quantitative score breakdown with visual charts[span_0](start_span)[span_0](end_span).
+An interactive web application built with **Streamlit** and the **Google GenAI SDK** that analyzes resumes (PDF, DOCX, or TXT), provides detailed qualitative feedback, and generates a quantitative score breakdown with visual charts.
 
 ---
 
