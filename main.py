@@ -7,11 +7,11 @@ import re
 import pandas as pd
 
 load_dotenv()
-client = genai(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 st.set_page_config(page_title="Resume Analyzer", page_icon="🐬", layout="wide")
 st.title("Resume Analyzer")
-st.markdown("Upload resume and get a **summary, key skills, score, and improvement suggestions **")
+st.markdown("Upload resume and get a **summary, key skills, score, and improvement suggestions**")
 
 uploaded_file = st.file_uploader("Upload resume", type=["pdf"])
 
@@ -44,7 +44,7 @@ if uploaded_file:
                     - skills match (30 pts)
                     - Experience and achievements (30 pts)
                     - Clarity & Formatting (30 pts)
-                    - Overall impression (20 pts)
+                    - Overall impression (10 pts)
                 Also provied the individual category score in JSON
                 Resume:
                 {text_clean}
@@ -53,7 +53,7 @@ if uploaded_file:
                     model="gemini-2.5-flash",
                     contents=prompt
                 )
-                result = response.choices[0].message.content
+                result = response.text
 
                 parts = result.split("Score JSON: ")
                 analysis_text = parts[0]
@@ -68,9 +68,9 @@ if uploaded_file:
                             "Category": list(score_data.keys()),
                             "Score": list(score_data.values())
                         })
-                        st.bar_chart(df.set_index("Cateogory"))
+                        st.bar_chart(df.set_index("Category"))
                         total_score = sum(score_data.values())
-                        st.progress(min(total_score / 100), 1.0)
+                        st.progress(min(total_score / 100, 1.0))
                     except: 
                         st.warning("could not parse json")
                 
