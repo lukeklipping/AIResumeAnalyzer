@@ -1,0 +1,35 @@
+﻿Ames, IA
+lukusklipping@gmail.com
+	Lukus Klipping
+	linkedin.com/in/luke-klipping
+github.com/lukeklipping
+	Software Engineering student experienced in building production-grade full-stack web applications and optimizing enterprise IT systems. Proficient in object-oriented design, modern frameworks (C#/.NET, Angular), and AI-driven development workflows, with a strong background in cross-functional team collaboration to deliver scalable, user-centric software solutions.
+Education
+* B.S. Software Engineering, Iowa State University        Aug 2023 - May 2027
+   * 3.43 GPA - Dean’s List Fall 2024 & Spring 2026
+Skills
+* Languages: C#, Java, Python, C/C++, TypeScript, JavaScript
+* Technologies: REST APIs, .NET, ASP.NET, EF Core, Node.js, Angular, React, SQL, MongoDB, Neo4j, JDBC, Claude Code, Google GenAI SDK, Streamlit, Pandas, Git, ADO, Linux/macOS, Windows, Microsoft Intune
+* Other:        Data structures, Algorithms, Object Oriented Programming (OOP), Computer Science fundamentals
+Work Experience
+IT Assistant                        Dickinson, Bradshaw, Fowler & Hagen, P.C.         Aug 2026 - Present
+                 Des Moines, Iowa
+* Mitigated technical downtime risks for legal practice teams by managing enterprise hardware deployments, executing network troubleshooting, and administering Active Directory to optimize software systems.
+Software Engineer Intern         Corteva Agriscience        May 2026 - Aug 2026
+                                Johnston, Iowa
+* Translated complex agricultural requirements into a production-ready, full-stack web application (C#, .NET, TypeScript, Angular), leveraging Claude Code to accelerate development, streamline feature delivery, and deploy real-time dashboards.
+IT Intern                         Dickinson, Bradshaw, Fowler & Hagen, P.C.         May 2025 - May 2026
+                 Des Moines, Iowa
+* Modernized user infrastructure by configuring and deploying 75+ Intune-managed devices for 85+ users, and authored technical documentation that cut average IT ticket resolution time by 75%.
+Projects
+* Time-Series Forecasting System | (Python, Streamlit, SciPy, Darts)
+        Building an interactive frontend-to-backend data dashboard allowing users to quantify and visualize the impact of         lossy data compression on time-series forecasting accuracy.
+* NourishBox Website | (React, Node.js, MongoDB) 
+Developed a full-stack meal plan subscription web app with user authentication, product search, an interactive shopping cart, and third-party REST API integrations.
+* CyCourse | (Java, Springboot, Android, SQL)
+Engineered backend services for a student scheduling and course review app featuring automated schedule generation, real-time messaging, and Google Maps API integration.
+* Resume Analyzer | (Python, Streamlit, Google GenAI SDK, Pandas)
+Developed an interactive full-stack AI utility that parses PDF resumes, interfaces with the Gemini API for deep qualitative evaluations.
+Leadership
+Pledge Marshal                Theta Chi Fraternity - Alpha Mu Chapter        Nov 2023–Nov 2024
+* Guided freshmen in transitioning from high school to college life by providing support, mentorship, and resources for academic and personal development.
