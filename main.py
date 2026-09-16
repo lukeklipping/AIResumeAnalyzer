@@ -1,5 +1,5 @@
 import streamlit as st
-from openai import OpenAI
+from google import genai
 import os
 from PyPDF2 import PdfReader
 from dotenv import load_dotenv
@@ -7,7 +7,7 @@ import re
 import pandas as pd
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPEN_API_KEY"))
+client = genai(api_key=os.getenv("GEMINI_API_KEY"))
 
 st.set_page_config(page_title="Resume Analyzer", page_icon="🐬", layout="wide")
 st.title("Resume Analyzer")
@@ -49,10 +49,9 @@ if uploaded_file:
                 Resume:
                 {text_clean}
                 """
-                response = client.chat.completions.create(
-                    model="gpt-4",
-                    messages=[{"role": "user", "content": prompt}],
-                    max_tokens=700
+                response = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=prompt
                 )
                 result = response.choices[0].message.content
 
