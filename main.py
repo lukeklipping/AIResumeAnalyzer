@@ -15,4 +15,13 @@ st.markdown("Upload resume and get a **summary, key skills, score, and improveme
 
 uploaded_file = st.file_uploader("Upload resume", type=["pdf"])
 
+if uploaded_file:
+    pdf = PdfReader(uploaded_file)
+    text = ""
+    for page in pdf.pages:
+        page_text = page.extract_text()
+        if page_text:
+            text += page_text + "\n"
 
+   
+                
