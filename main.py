@@ -5,6 +5,7 @@ from PyPDF2 import PdfReader
 from dotenv import load_dotenv
 import re
 import pandas as pd
+from docx import Document
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -13,15 +14,23 @@ st.set_page_config(page_title="Resume Analyzer", page_icon="🐬", layout="wide"
 st.title("Resume Analyzer")
 st.markdown("Upload resume and get a **summary, key skills, score, and improvement suggestions**")
 
-uploaded_file = st.file_uploader("Upload resume", type=["pdf"])
+uploaded_file = st.file_uploader("Upload resume", type=["pdf", "docx", "txt"])
 
 if uploaded_file:
-    pdf = PdfReader(uploaded_file)
     text = ""
-    for page in pdf.pages:
-        page_text = page.extract_text()
-        if page_text:
-            text += page_text + "\n"
+    if uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        doc = Document(uploaded_file)
+        for para in doc.paragraphs:
+            text += para.text + "\n"
+    elif uploaded_file.type == "text/plain":
+        uploaded_file.seek(0)
+        text = uploaded_file.read().decode("utf-8")
+    else:
+        pdf = PdfReader(uploaded_file)
+        for page in pdf.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
 
     text_clean = re.sub(r"(?<!\n)\n(?!\n)", " ", text)
 
