@@ -43,7 +43,7 @@ Make sure you have Python installed on your system (Python 3.8+ recommended). Yo
 
 3. **Install the dependencies:**
     ```bash
-    pip install streamlit google-genai PyPDF2 python-dotenv pandas python-docx
+    pip install streamlit google-genai PyPDF2 python-dotenv pandas python-docx pydantic
 
 4. **Setup environment variables**
     Create a .env file in the root directory of your project and add your Gemini API key:

@@ -1,3 +1,4 @@
+from google.genai import types
 import streamlit as st
 from google import genai
 import os
@@ -6,6 +7,17 @@ from dotenv import load_dotenv
 import re
 import pandas as pd
 from docx import Document
+from pydantic import BaseModel
+
+class ResumeAnalysis(BaseModel):
+    summary: str
+    key_skills: list[str]
+    improvements: list[str]
+    skills_score: int
+    experience_score: int
+    clarity_score: int
+    overall_score: int
+
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -60,26 +72,46 @@ if uploaded_file:
                 """
                 response = client.models.generate_content(
                     model="gemini-2.5-flash",
-                    contents=prompt
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        response_mime_type="application/json",
+                        response_schema=ResumeAnalysis,
+                    ),
                 )
-                result = response.text
+                analysis: ResumeAnalysis = response.parsed
 
-                parts = result.split("Score JSON: ")
-                analysis_text = parts[0]
-                st.write(analysis_text)
+                print(analysis.summary)
+                print(analysis.key_skills)
+                total_score = analysis.skills_score + analysis.experience_score + analysis.clarity_score + analysis.overall_score
+                st.subheader("Executive Summary")
+                st.write(analysis.summary)
 
-                if len(parts) > 1:
-                    try:
-                        import json
-                        score_data = json.loads(parts[1].strip())
-                        st.subheader("Score breakdown")
-                        df = pd.DataFrame({
-                            "Category": list(score_data.keys()),
-                            "Score": list(score_data.values())
-                        })
-                        st.bar_chart(df.set_index("Category"))
-                        total_score = sum(score_data.values())
-                        st.progress(min(total_score / 100, 1.0))
-                    except: 
-                        st.warning("could not parse json")
-                
+                st.subheader("Key Skills")
+                st.write(", ".join(analysis.key_skills))
+
+                st.subheader("Improvements & Recommendations")
+                for imp in analysis.improvements:
+                    st.markdown(f"- {imp}")
+
+                st.subheader("Score Breakdown")
+                score_data = {
+                    "Skills Match": analysis.skills_score,
+                    "Experience": analysis.experience_score,
+                    "Clarity & Formatting": analysis.clarity_score,
+                    "Overall Impression": analysis.overall_score,
+                }
+
+                df = pd.DataFrame(
+                    {
+                        "Category": list(score_data.keys()),
+                        "Score": list(score_data.values()),
+                    }
+                )
+                st.bar_chart(df.set_index("Category"))
+
+                total_score = sum(score_data.values())
+                st.metric(
+                    label="Total Resume Score", value=f"{total_score} / 100"
+                )
+                st.progress(min(total_score / 100, 1.0))
+               
