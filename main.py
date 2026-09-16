@@ -6,6 +6,17 @@ from dotenv import load_dotenv
 import re
 import pandas as pd
 from docx import Document
+from pydantic import BaseModel
+
+class ResumeAnalysis(BaseModel):
+    summary: str
+    key_skills: list[str]
+    improvements: list[str]
+    skills_score: int
+    experience_score: int
+    clarity_score: int
+    overall_score: int
+
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
